@@ -1,0 +1,29 @@
+@hostname = api.twelvedata.com
+@contentType = application/json
+@author = apikey 834bba2deeee4cc4a9b51a35eba36966
+
+### all
+GET https://{{hostname}}/stocks?source=docs&exchange=NYSE HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{author}}
+
+### only one
+GET https://{{hostname}}/stocks?exchange=NYSE&symbol=A HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{author}}
+
+### history
+GET https://{{hostname}}/time_series?symbol=NFLX&interval=5min&start_date=2021-04-16%2009:48:00&end_date=2021-04-16%2019:48:00 HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{author}}
+
+### interval
+GET https://{{hostname}}/time_series?symbol=NFLX&interval=5min HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{author}}
+
+### price
+GET https://{{hostname}}/price?symbol=NFLX HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{author}}
+
