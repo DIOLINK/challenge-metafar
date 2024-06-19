@@ -17,6 +17,6 @@ module.exports = {
       1,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
-    'react-refresh/only-export-components': ['warn'],
+    'react-refresh/only-export-components': 'warn',
   },
 };
