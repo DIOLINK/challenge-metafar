@@ -12,7 +12,9 @@ export const Layout = ({
     <>
       <NavBar />
       <Container fluid="md" className="content">
-        <Row className="center justify-content-center align-items-center">
+        <Row
+          className={`center justify-content-center ${isLoading ? 'align-items-center' : ''}`}
+        >
           <Col>
             {isLoading ? (
               <Spinner animation="border" className="spinner" />
