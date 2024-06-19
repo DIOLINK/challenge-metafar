@@ -5,7 +5,7 @@ import { Empty } from './Empty';
 import { ItemAction } from './ItemAction';
 
 export const ListActionGroup = () => {
-  const { data } = useStocksList();
+  const { data, setStockInfo } = useStocksList();
   return (
     <ListGroup as={'ul'}>
       {isEmptyArray(data) ? (
@@ -15,7 +15,7 @@ export const ListActionGroup = () => {
           <ItemAction
             key={stockData.name + index}
             {...stockData}
-            onClick={() => console.log(stockData)}
+            onClick={() => setStockInfo(stockData)}
           />
         ))
       )}

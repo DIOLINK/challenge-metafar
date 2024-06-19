@@ -1,5 +1,5 @@
 import { useFetchStocks } from '@/hooks/useFetchStocks';
-import { StocksListContextProps } from '@/types';
+import { StockData, StocksListContextProps } from '@/types';
 import { filterStockBySymbol } from '@/utils';
 import {
   PropsWithChildren,
@@ -18,6 +18,7 @@ export const useStocksList = () => useContext(StocksListContext);
 export const StocksListProvider = ({ children }: PropsWithChildren) => {
   const { data, loading, error, setGetStocksListProps } = useFetchStocks();
   const [stocksToFilter, setStocksToFilter] = useState('');
+  const [stockInfo, setStockInfo] = useState<StockData>({} as StockData);
 
   return (
     <StocksListContext.Provider
@@ -28,8 +29,10 @@ export const StocksListProvider = ({ children }: PropsWithChildren) => {
         ),
         loading,
         error,
+        stockInfo,
         setGetStocksListProps,
         setStocksToFilter,
+        setStockInfo,
       }}
     >
       {children}
