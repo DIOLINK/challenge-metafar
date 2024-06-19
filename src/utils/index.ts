@@ -18,3 +18,9 @@ export function isEmptyArray(array: StockData[]) {
   return array.length === 0;
 }
 
+export function filterStockBySymbol(symbol: string, stockData: StockData[]) {
+  if (symbol === '') return stockData;
+  return stockData.filter((stock) =>
+    stock.symbol.toLowerCase().includes(symbol.toLowerCase())
+  );
+}
