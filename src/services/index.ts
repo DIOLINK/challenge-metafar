@@ -17,7 +17,7 @@ const API_ROUTES = {
     end_date = '2021-04-16%2019:48:00',
     options = '',
   }: GetHistoryProps) {
-    return `/time_series?symbol=${symbol}&interval=${interval}&start_date=${start_date}&end_date=${end_date}${options}`;
+    return `time_series?symbol=${symbol}&interval=${interval}&start_date=${start_date}&end_date=${end_date}${options}`;
   },
 };
 

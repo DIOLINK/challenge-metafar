@@ -94,7 +94,8 @@ export interface HookFetchTimeSeries extends FetchTimeSeries {
   setGetHistoryProps: Dispatch<React.SetStateAction<GetHistoryProps>>;
 }
 
-
-export interface StocksListContextProps extends HookFetchStocks { }
+export interface StocksListContextProps extends HookFetchStocks {
+  setStocksToFilter: Dispatch<React.SetStateAction<string>>;
+}
 
 export interface HistoryStockContextProps extends HookFetchTimeSeries {}
