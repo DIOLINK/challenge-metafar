@@ -1,10 +1,10 @@
 import { getStocksList } from '@/services';
-import { FetchStocksList, GetStocksListProps } from '@/types';
+import { FetchStocksList, GetStocksListProps, HookFetchStocks } from '@/types';
 import { useEffect, useState } from 'react';
 
 const INIT_VALUE = { data: [], loading: true, error: null };
 const INIT_PROPS: GetStocksListProps = { exchange: 'NYSE' };
-export const useFetchStocks = () => {
+export const useFetchStocks = (): HookFetchStocks => {
   const [stocks, setStocks] = useState<FetchStocksList>(INIT_VALUE);
   const [getStocksListProps, setGetStocksListProps] =
     useState<GetStocksListProps>(INIT_PROPS);
@@ -19,5 +19,5 @@ export const useFetchStocks = () => {
       );
   }, [getStocksListProps]);
 
-  return { stocks, setGetStocksListProps };
+  return { ...stocks, setGetStocksListProps };
 };

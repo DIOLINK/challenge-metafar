@@ -1,5 +1,5 @@
 import { getHistoryStock } from '@/services';
-import { FetchTimeSeries, GetHistoryProps, Meta } from '@/types';
+import { FetchTimeSeries, GetHistoryProps, HookFetchTimeSeries, Meta } from '@/types';
 import { useEffect, useState } from 'react';
 
 const INIT_VALUE = {
@@ -16,7 +16,7 @@ const INIT_VALUE_HISTORY_PROPS: GetHistoryProps = {
   options: '',
 };
 
-export function useFetchHistory() {
+export function useFetchHistory(): HookFetchTimeSeries {
   const [history, setHistory] = useState<FetchTimeSeries>(INIT_VALUE);
   const [getHistoryProps, setGetHistoryProps] = useState<GetHistoryProps>(
     INIT_VALUE_HISTORY_PROPS
@@ -37,5 +37,5 @@ export function useFetchHistory() {
       );
   }, [getHistoryProps]);
 
-  return { history, setGetHistoryProps };
+  return { ...history, setGetHistoryProps };
 }
