@@ -3,7 +3,7 @@ import { FetchStocksList, GetStocksListProps, HookFetchStocks } from '@/types';
 import { useEffect, useState } from 'react';
 
 const INIT_VALUE = { data: [], loading: true, error: null };
-const INIT_PROPS: GetStocksListProps = { exchange: 'NYSE' };
+const INIT_PROPS: GetStocksListProps = { exchange: 'NASDAQ' };
 export const useFetchStocks = (): HookFetchStocks => {
   const [stocks, setStocks] = useState<FetchStocksList>(INIT_VALUE);
   const [getStocksListProps, setGetStocksListProps] =
