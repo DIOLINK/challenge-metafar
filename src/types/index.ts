@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface StocksList {
   data: StockData[];
   count: number;
@@ -81,4 +83,18 @@ export interface FetchProps {
 }
 
 export interface FetchStocksList extends Pick<StocksList, 'data'>, FetchProps {}
-export interface FetchTimeSeries extends Omit<TimeSeries, 'status'>, FetchProps {}
+export interface FetchTimeSeries
+  extends Omit<TimeSeries, 'status'>,
+    FetchProps {}
+
+export interface HookFetchStocks extends FetchStocksList {
+  setGetStocksListProps: Dispatch<SetStateAction<GetStocksListProps>>;
+}
+export interface HookFetchTimeSeries extends FetchTimeSeries {
+  setGetHistoryProps: Dispatch<React.SetStateAction<GetHistoryProps>>;
+}
+
+
+export interface StocksListContextProps extends HookFetchStocks { }
+
+export interface HistoryStockContextProps extends HookFetchTimeSeries {}
