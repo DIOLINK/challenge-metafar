@@ -29,3 +29,11 @@ export function idexToInterval(index: number): string {
   return `${3 * (index * index) + index + 1} min`;
 }
 
+export function getDateNow(): string {
+  return new Date()
+    .toISOString()
+    .replace('T', '%20')
+    .replace('Z', '')
+    .slice(0, 21);
+}
+
