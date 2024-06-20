@@ -34,7 +34,7 @@ export function getDateNow(): string {
     .toISOString()
     .replace('T', '%20')
     .replace('Z', '')
-    .slice(0, 21);
+    .slice(0, 18);
 }
 
 export const TIME_INTERVAL: { [key: string]: number } = {

@@ -20,12 +20,15 @@ const API_ROUTES = {
     interval = '5min',
     start_date,
     end_date,
+    date,
     options = '',
   }: GetHistoryProps) {
     return `time_series?symbol=${symbol}&interval=${interval}${
-      !!start_date && !!end_date
-        ? `&start_date=${start_date}&end_date=${end_date}`
-        : ''
+      !!date
+        ? `&date=${date}`
+        : !!start_date && !!end_date
+          ? `&start_date=${start_date}&end_date=${end_date}`
+          : ''
     }${options}`;
   },
 };
@@ -46,11 +49,19 @@ export async function getHistoryStock({
   interval = '5min',
   start_date,
   end_date,
+  date,
   options = '',
 }: GetHistoryProps) {
   const resp = await fetchGET(
     API_URL +
-      API_ROUTES.history({ symbol, interval, start_date, end_date, options })
+      API_ROUTES.history({
+        symbol,
+        interval,
+        start_date,
+        end_date,
+        date,
+        options,
+      })
   );
   const data: TimeSeries = await resp.json();
   return data;
