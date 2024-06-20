@@ -1,15 +1,16 @@
 import { useHistoryStock } from '@/contexts/HistoryStockContext';
 import { useStocksList } from '@/contexts/StocksListContext';
-import { getDateNow, idexToInterval } from '@/utils';
 import { FormEvent, useEffect, useState } from 'react';
-import { Button, Card, Col, Form, InputGroup, Row } from 'react-bootstrap';
+import { Button, Card, Form, Row } from 'react-bootstrap';
 
+import { getDateNow } from '@/utils';
 import { Chart } from '../Chart';
+import { FormInfo } from './FormInfo';
 import { SubTitle } from './SubTitle';
 
 export const StockInfo = () => {
   const { stockInfo } = useStocksList();
-  const { setGetHistoryProps, refForm } = useHistoryStock();
+  const { refForm, setGetHistoryProps } = useHistoryStock();
   const [showChart, setShowChart] = useState(false);
 
   useEffect(() => {
@@ -52,60 +53,13 @@ export const StockInfo = () => {
         <Card.Body>
           <SubTitle {...stockInfo} />
           <Form ref={refForm} onSubmit={handleSubmit}>
-            <Form.Group as={Row} className="mb-3">
-              <Col>
-                <Row>
-                  <Form.Group as={Col}>
-                    <Form.Check
-                      type="radio"
-                      label="Real Time"
-                      name="realTime"
-                      className="text-start"
-                      id="realTime"
-                      defaultChecked
-                    />
-                  </Form.Group>
-                  <Form.Group as={Col} className="mb-3">
-                    <Form.Select name="interval" required>
-                      {Array.from(new Array(3)).map((_, index) => (
-                        <option key={index}>{idexToInterval(index)}</option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Form.Group as={Col}>
-                    <Form.Check
-                      type="radio"
-                      label="History"
-                      name="realTime"
-                      className="text-start"
-                      id="history"
-                    />
-                  </Form.Group>
-                  <Form.Group as={Col}>
-                    <InputGroup className="mb-3">
-                      <InputGroup.Text>Start:</InputGroup.Text>
-                      <Form.Control
-                        type="date"
-                        name="start-date"
-                        id="start-date"
-                      />
-                    </InputGroup>
-                    <InputGroup>
-                      <InputGroup.Text>End:</InputGroup.Text>
-                      <Form.Control type="date" name="end-date" id="end-date" />
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-              </Col>
-            </Form.Group>
+            <FormInfo />
             <Button variant="success" type="submit">
               Show Graphic
             </Button>
           </Form>
         </Card.Body>
-        {showChart && <Chart />}
+        <Row className={'mb-3'}>{showChart && <Chart />}</Row>
       </Card>
     </Row>
   );

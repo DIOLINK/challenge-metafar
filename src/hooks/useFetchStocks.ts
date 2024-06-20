@@ -1,5 +1,6 @@
 import { getStocksList } from '@/services';
 import { FetchStocksList, GetStocksListProps, HookFetchStocks } from '@/types';
+import { isEmptyArray } from '@/utils';
 import { useEffect, useState } from 'react';
 
 const INIT_VALUE = { data: [], loading: true, error: null };
@@ -10,6 +11,7 @@ export const useFetchStocks = (): HookFetchStocks => {
     useState<GetStocksListProps>(INIT_PROPS);
 
   useEffect(() => {
+    if (!isEmptyArray(stocks.data)) return;
     getStocksList({ ...getStocksListProps })
       .then(({ data }) => {
         setStocks((oldStocks) => ({ ...oldStocks, data, loading: false }));
