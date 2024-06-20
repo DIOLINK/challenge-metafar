@@ -5,7 +5,7 @@ import {
   HookFetchTimeSeries,
   Meta,
 } from '@/types';
-import { isEmptyObject } from '@/utils';
+import { TIME_INTERVAL, isEmptyObject } from '@/utils';
 import { useEffect, useState } from 'react';
 
 const INIT_VALUE = {
@@ -23,18 +23,26 @@ export function useFetchHistory(): HookFetchTimeSeries {
 
   useEffect(() => {
     if (isEmptyObject(getHistoryProps)) return;
-    getHistoryStock({ ...getHistoryProps })
-      .then(({ meta, values }) => {
-        setHistory((oldHistory) => ({
-          ...oldHistory,
-          loading: false,
-          meta,
-          values,
-        }));
-      })
-      .catch((error) =>
-        setHistory((oldHistory) => ({ ...oldHistory, loading: false, error }))
-      );
+    const fetchHistoryStock = () => {
+      getHistoryStock({ ...getHistoryProps })
+        .then(({ meta, values }) => {
+          setHistory((oldHistory) => ({
+            ...oldHistory,
+            loading: false,
+            meta,
+            values,
+          }));
+        })
+        .catch((error) =>
+          setHistory((oldHistory) => ({ ...oldHistory, loading: false, error }))
+        );
+    };
+    fetchHistoryStock();
+    const intervalId = setInterval(
+      fetchHistoryStock,
+      TIME_INTERVAL[getHistoryProps.interval]
+    );
+    return () => clearInterval(intervalId);
   }, [getHistoryProps]);
 
   return { ...history, setGetHistoryProps };
