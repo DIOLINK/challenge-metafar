@@ -57,7 +57,7 @@ export interface Meta extends Omit<StockData, 'name'> {
 }
 
 export interface Value {
-  datetime: Date;
+  datetime: string;
   open: string;
   high: string;
   low: string;
@@ -75,6 +75,7 @@ export interface GetHistoryProps
     Pick<StockData, 'symbol'> {
   start_date?: string;
   end_date?: string;
+  date?: string;
 }
 
 export interface FetchProps {

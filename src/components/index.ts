@@ -1,3 +1,5 @@
+import { Chart } from './Chart';
+import { DropdownListAction } from './DropdownListAction';
 import { Layout } from './Layout';
 
-export { Layout };
+export { Chart, DropdownListAction, Layout };

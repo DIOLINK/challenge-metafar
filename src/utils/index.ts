@@ -1,4 +1,4 @@
-import { StockData } from '@/types';
+import { StockData, Value } from '@/types';
 const API_KEY = import.meta.env.VITE_API_KEY;
 export function fetchGET(url: string) {
   return fetch(url, {
@@ -41,4 +41,11 @@ export const TIME_INTERVAL: { [key: string]: number } = {
   '1min': 60000,
   '5min': 300000,
   '15min': 900000,
+};
+
+export const formatValues = (values: Value[]) => {
+  return values.map((item) => [
+    Date.parse(item.datetime),
+    parseFloat(item.close),
+  ]);
 };
