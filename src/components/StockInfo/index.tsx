@@ -1,13 +1,17 @@
 import { useHistoryStock } from '@/contexts/HistoryStockContext';
 import { useStocksList } from '@/contexts/StocksListContext';
-import { TIME_INTERVAL, getDateNow, idexToInterval } from '@/utils';
-import { FormEvent, useEffect } from 'react';
+import { getDateNow, idexToInterval } from '@/utils';
+import { FormEvent, useEffect, useState } from 'react';
 import { Button, Card, Col, Form, InputGroup, Row } from 'react-bootstrap';
+
+import { Chart } from '../Chart';
 import { SubTitle } from './SubTitle';
 
 export const StockInfo = () => {
   const { stockInfo } = useStocksList();
-  const { values, loading, setGetHistoryProps, refForm } = useHistoryStock();
+  const { setGetHistoryProps, refForm } = useHistoryStock();
+  const [showChart, setShowChart] = useState(false);
+
   useEffect(() => {
     if (!refForm.current) return;
   }, [refForm.current]);
@@ -15,27 +19,29 @@ export const StockInfo = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
+    const formData = new FormData(event.currentTarget);
     const historyInput = form.elements.namedItem('history') as HTMLInputElement;
-    const intervalSelect = form.elements.namedItem(
-      'interval'
-    ) as HTMLSelectElement;
+    const intervalSelect = formData.get('interval');
+    const start_date = formData.get('start-date');
+    const end_date = formData.get('end-date');
+
     if (historyInput && intervalSelect) {
-      if (historyInput.checked) {
+      setShowChart(true);
+      if (historyInput.checked && start_date && end_date) {
         // History
-        setGetHistoryProps((oldGetHistoryProps) => ({
-          ...oldGetHistoryProps,
-          interval: intervalSelect.value.trim().replace(' ', ''),
+        setGetHistoryProps({
+          interval: String(intervalSelect).trim().replace(' ', ''),
           symbol: stockInfo.symbol,
-          end_date: getDateNow(),
-          start_date: getDateNow(),
-        }));
+          start_date: String(start_date),
+          end_date: String(end_date),
+        });
       } else {
         //Real Time
-        setGetHistoryProps((oldGetHistoryProps) => ({
-          ...oldGetHistoryProps,
-          interval: intervalSelect.value.trim().replace(' ', ''),
+        setGetHistoryProps({
+          interval: String(intervalSelect).trim().replace(' ', ''),
           symbol: stockInfo.symbol,
-        }));
+          date: getDateNow(),
+        });
       }
     }
   };
@@ -99,6 +105,7 @@ export const StockInfo = () => {
             </Button>
           </Form>
         </Card.Body>
+        {showChart && <Chart />}
       </Card>
     </Row>
   );
