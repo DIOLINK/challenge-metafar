@@ -24,3 +24,8 @@ export function filterStockBySymbol(symbol: string, stockData: StockData[]) {
     stock.symbol.toLowerCase().includes(symbol.toLowerCase())
   );
 }
+
+export function idexToInterval(index: number): string {
+  return `${3 * (index * index) + index + 1} min`;
+}
+
