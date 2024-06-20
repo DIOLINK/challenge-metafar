@@ -37,3 +37,8 @@ export function getDateNow(): string {
     .slice(0, 21);
 }
 
+export const TIME_INTERVAL: { [key: string]: number } = {
+  '1min': 60000,
+  '5min': 300000,
+  '15min': 900000,
+};
