@@ -73,8 +73,8 @@ export interface GetHistoryProps
   extends Pick<Meta, 'interval'>,
     Pick<GetStocksListProps, 'options'>,
     Pick<StockData, 'symbol'> {
-  start_date: string;
-  end_date: string;
+  start_date?: string;
+  end_date?: string;
 }
 
 export interface FetchProps {
@@ -100,4 +100,6 @@ export interface StocksListContextProps extends HookFetchStocks {
   setStockInfo: Dispatch<React.SetStateAction<StockData>>;
 }
 
-export interface HistoryStockContextProps extends HookFetchTimeSeries {}
+export interface HistoryStockContextProps extends HookFetchTimeSeries {
+  refForm: React.MutableRefObject<HTMLFormElement | null>;
+}
