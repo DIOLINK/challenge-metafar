@@ -17,6 +17,12 @@ GET https://{{hostname}}/time_series?symbol=NFLX&interval=5min&start_date=2021-0
 content-type: {{contentType}}
 Authorization: {{author}}
 
+### only one
+GET https://{{hostname}}/time_series?symbol=AADI&interval=1min&date=2024-06-20%2020:08:46 HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{author}}
+
+
 ### interval
 GET https://{{hostname}}/time_series?symbol=NFLX&interval=5min HTTP/1.1
 content-type: {{contentType}}
