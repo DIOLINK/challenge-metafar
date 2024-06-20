@@ -73,7 +73,7 @@ Ten en cuenta que debes tener acceso a la terminal de tu sistema operativo, adem
       pnpm install
       ```
 
-4. En la raiz del proyecto encontraras un archivo con el nombre de `template.env` el cual deberas renombra a `.env`.
+4. En la raiz del proyecto encontraras un archivo con el nombre de `template.env` el cual deberas renombra a `.env` y deves colocar la tu [apikey](https://twelvedata.com/login).
    
 5. Inicia la aplicación en modo de desarrollo:
        
